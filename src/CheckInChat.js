@@ -58,7 +58,7 @@ function CheckInChat({ input }) {
       const response = await openai.post('/chat/completions', {
         model: "gpt-3.5-turbo",
         messages: [
-          { role: "system", content: "Extract the most important noun or date from the following text. Respond with only that word or date." },
+          { role: "system", content: "Extract all important noun and date from the following text. Respond with only that word or date." },
           { role: "user", content: text }
         ]
       });
@@ -74,7 +74,7 @@ function CheckInChat({ input }) {
   const generateImage = async (prompt) => {
     try {
       const response = await openai.post('/images/generations', {
-        model: "dall-e-2",
+        model: "dall-e-3",
         prompt: `A clear, simple image representing ${prompt}`,
         n: 1,
         size: "256x256"
@@ -150,7 +150,7 @@ function CheckInChat({ input }) {
         try {
           return await retryWithExponentialBackoff(async () => {
             const response = await openai.post('/images/generations', {
-              model: "dall-e-2",
+              model: "dall-e-3",
               prompt: `A clear, simple image representing ${word}`,
               n: 1,
               size: "256x256"
