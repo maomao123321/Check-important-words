@@ -41,7 +41,7 @@ function App() {
           }}
         >
           <HomeIcon fontSize="large" />
-          <Typography variant="caption">Refresh</Typography>
+          <Typography variant="caption">Clear</Typography>
         </IconButton>
       </Box>
 

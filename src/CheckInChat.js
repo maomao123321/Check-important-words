@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Typography, CircularProgress, Card, CardContent, IconButton } from '@mui/material';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import { Box, Card, CardContent, CircularProgress, IconButton, Typography } from '@mui/material';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 
 const openai = axios.create({
@@ -58,7 +58,7 @@ function CheckInChat({ input }) {
       const response = await openai.post('/chat/completions', {
         model: "gpt-3.5-turbo",
         messages: [
-          { role: "system", content: "Extract all important noun and date from the following text. Respond with only that word or date." },
+          { role: "system", content: "Extract all important noun,number or date from the following text. Respond with only that word or date." },
           { role: "user", content: text }
         ]
       });
@@ -74,7 +74,7 @@ function CheckInChat({ input }) {
   const generateImage = async (prompt) => {
     try {
       const response = await openai.post('/images/generations', {
-        model: "dall-e-3",
+        model: "dall-e-2",
         prompt: `A clear, simple image representing ${prompt}`,
         n: 1,
         size: "256x256"
@@ -107,7 +107,7 @@ function CheckInChat({ input }) {
           { role: "system", content: `Given a correctly spelled word, generate three alternative words that the user might have actually meant. Follow these rules:
             1. The first word should correct a possible phonetic error (the user's word sounds similar but is spelled incorrectly).
             2. The second word should correct a possible semantic error (the user might have used a word with a similar meaning but not the one they intended).
-            3. The third word should correct a possible mixed error (combining aspects of phonetic and semantic errors).
+            3. The third word should correct a possible mixed error (belong to the same category, but are not the same item. For example, cats and dogs, doctors and nurses, oranges and peaches.).
             4. All suggested words should be common, everyday words that are easy to understand.
             5. Avoid obscure or rarely used words.
             6. Each time this prompt is run, try to generate different words from previous runs.
@@ -121,8 +121,8 @@ function CheckInChat({ input }) {
   
             Explanation:
             - 'bat, hat, sat' corrects the phonetic error (rhymes with it)
-            - 'pet, cloud, fruit' corrects a possible mixed error (user might have meant a general term for a domestic animal)
-            - 'dog, horse, fish' corrects a possible semantic error (sounds somewhat similar and is also a common pet)
+            - 'pet, drink, fruit' corrects a possible mixed error (user might have meant a general term for a domestic animal)
+            - 'dog, horse, fish' corrects a possible semantic error (belong to the same category, but are not the same item. For example, cats and dogs, doctors and nurses, oranges and peaches.)
 
   
             Respond with only these three words, separated by commas.` },
@@ -132,7 +132,7 @@ function CheckInChat({ input }) {
       });
       const words = response.data.choices[0].message.content.split(',').map(w => w.trim());
       setRelatedWords(words);
-      setAiMessage("You just denied, so which did you mean?");
+      setAiMessage("You just denied, so what do you mean?");
   
       // Generate images for related words
       await generateRelatedImages(words);
@@ -150,7 +150,7 @@ function CheckInChat({ input }) {
         try {
           return await retryWithExponentialBackoff(async () => {
             const response = await openai.post('/images/generations', {
-              model: "dall-e-3",
+              model: "dall-e-2",
               prompt: `A clear, simple image representing ${word}`,
               n: 1,
               size: "256x256"
@@ -187,7 +187,7 @@ function CheckInChat({ input }) {
           { role: "system", content: `Given a correctly spelled word, generate three alternative words that the user might have actually meant. Follow these rules:
             1. The first word should correct a possible phonetic error (the user's word sounds similar but is spelled incorrectly).
             2. The second word should correct a possible semantic error (the user might have used a word with a similar meaning but not the one they intended).
-            3. The third word should correct a possible mixed error (combining aspects of phonetic and semantic errors).
+            3. The third word should correct a possible mixed error (belong to the same category, but are not the same item. For example, cats and dogs, doctors and nurses, oranges and peaches.).
             4. All suggested words should be common, everyday words that are easy to understand.
             5. Avoid obscure or rarely used words.
             6. Each time this prompt is run, try to generate different words from previous runs.
