@@ -1,6 +1,7 @@
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Box, Card, CardContent, CircularProgress, IconButton, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
@@ -74,10 +75,10 @@ function CheckInChat({ input }) {
   const generateImage = async (prompt) => {
     try {
       const response = await openai.post('/images/generations', {
-        model: "dall-e-2",
+        model: "dall-e-3",
         prompt: `A clear, simple image representing ${prompt}`,
         n: 1,
-        size: "256x256"
+        size: "1024x1024"
       });
       setImageUrl(response.data.data[0].url);
     } catch (error) {
@@ -150,10 +151,10 @@ function CheckInChat({ input }) {
         try {
           return await retryWithExponentialBackoff(async () => {
             const response = await openai.post('/images/generations', {
-              model: "dall-e-2",
+              model: "dall-e-3",
               prompt: `A clear, simple image representing ${word}`,
               n: 1,
-              size: "256x256"
+              size: "1024x1024"
             });
             return response.data.data[0].url;
           });
@@ -265,6 +266,13 @@ function CheckInChat({ input }) {
     }
   };
 
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text).then(() => {
+      console.log('Text copied to clipboard');
+    }).catch(err => {
+      console.error('Failed to copy text: ', err);
+    });
+  };
 
   return (
     <Box sx={{ 
@@ -301,6 +309,9 @@ function CheckInChat({ input }) {
             {finalNote}
             <IconButton onClick={() => textToSpeech(finalNote)} size="small">
               <VolumeUpIcon />
+            </IconButton>
+            <IconButton onClick={() => handleCopy(finalNote)} size="small">
+              <ContentCopyIcon />
             </IconButton>
           </Typography>
         ) : (
