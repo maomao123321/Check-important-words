@@ -71,34 +71,51 @@ function VoiceInput({ onSend }) {
   return (
     <Box
       sx={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        padding: 2,
-        backgroundColor: 'background.paper',
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
+        padding: 2,
+        backgroundColor: 'background.paper',
       }}
     >
       <TextField
-        fullWidth
         variant="outlined"
         value={input}
         onChange={handleInputChange}
-        placeholder="Input your notes here:  'Meet on Friday'"
-        sx={{ mr: 1 }}
+        placeholder="Input your important information here:  'Meet on Friday'"
         onKeyPress={(e) => {
           if (e.key === 'Enter') {
+            e.preventDefault();
             handleSend();
           }
         }}
+        sx={{ 
+          width: '60%',
+          mr: 2,
+          '& .MuiInputBase-root': {
+            height: '4rem',  // 增加整个输入框的高度
+          },
+          '& .MuiInputBase-input': {
+            fontSize: '1.4rem',
+            height: '4rem',  // 匹配外部容器的高度
+            padding: '0 1rem',  // 调整左右内边距，移除上下内边距
+            display: 'flex',
+            alignItems: 'center',  // 确保文字垂直居中
+          }
+        }}
       />
-      <IconButton onClick={handleVoiceInput} color={isRecording ? "secondary" : "primary"}>
-        <MicIcon />
+      <IconButton 
+        onClick={handleVoiceInput} 
+        color={isRecording ? "secondary" : "primary"}
+        sx={{ mr: 1 }}
+      >
+        <MicIcon sx={{ fontSize: 40 }} />
       </IconButton>
-      <IconButton onClick={handleSend} color="primary">
-        <SendIcon />
+      <IconButton 
+        onClick={handleSend} 
+        color="primary"
+      >
+        <SendIcon sx={{ fontSize: 40 }} />
       </IconButton>
     </Box>
   );

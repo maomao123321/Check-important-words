@@ -298,7 +298,7 @@ function CheckInChat({ input }) {
             align="center"
             sx={{ color: 'text.secondary', fontStyle: 'italic' }}
           >
-            AI will double-check your notes here
+            AI will double-check important words here by generating related pictures
           </Typography>
         ) : finalNote ? (
           <Typography

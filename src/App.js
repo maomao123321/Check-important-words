@@ -17,38 +17,52 @@ function App() {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-      {/* Title and Home Icon */}
-      <Box sx={{ position: 'relative', my: 4 }}>
-        <Typography
-          variant="h2"
-          align="center"
+  {/* Title and Home Icon */}
+  <Box sx={{ 
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    position: 'relative', 
+    my: 4 
+  }}>
+    <Typography
+      variant="h2"
+      sx={{
+        fontWeight: 'bold',
+        mr: 4  // 添加右边距，为图标腾出空间
+      }}
+    >
+      Double Check Important Words
+    </Typography>
+    <IconButton
+      onClick={handleReset}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '12px',
+      }}
+    >
+        <HomeIcon sx={{fontSize: 48}} />
+          <Typography 
+          variant="subtitle1" 
           sx={{
-            fontWeight: 'bold',
+            mt:1,
+            fontweight:"bold"
           }}
-        >
-          Check-in Notes
-        </Typography>
-        <IconButton
-          onClick={handleReset}
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            right: 16,
-            transform: 'translateY(-50%)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <HomeIcon fontSize="large" />
-          <Typography variant="caption">Clear</Typography>
+        
+          >Clear</Typography>
         </IconButton>
+      </Box>
+
+      {/* VoiceInput */}
+      <Box sx={{ mb: 2 }}>
+        <VoiceInput onSend={handleSend} />
       </Box>
 
       {/* Main Content */}
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <CheckInChat input={input} />
-        <VoiceInput onSend={handleSend} />
       </Box>
     </Box>
   );
