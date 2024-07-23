@@ -202,7 +202,7 @@ function CheckInChat({ input }) {
       });
       const words = response.data.choices[0].message.content.split(',').map(w => w.trim());
       setRelatedWords(words);
-      setAiMessage("You just denied, so which did you mean?");
+      setAiMessage("You just denied, so what do you mean?");
   
       // 为新生成的词重新生成图片
       await generateRelatedImages(words);
@@ -298,7 +298,7 @@ function CheckInChat({ input }) {
             align="center"
             sx={{ color: 'text.secondary', fontStyle: 'italic' }}
           >
-            AI will double-check important words here by generating related pictures
+            AI will help you find the right words here by generating related pictures
           </Typography>
         ) : finalNote ? (
           <Typography
@@ -350,6 +350,7 @@ function CheckInChat({ input }) {
                       color="primary"
                     >
                       <CheckCircleOutlineIcon sx={{ fontSize: 40 }} />
+                      Yes
                     </IconButton>
                     <IconButton 
                       onClick={() => handleFeedback(false)} 
@@ -357,6 +358,7 @@ function CheckInChat({ input }) {
                       color="error"
                     >
                       <CancelOutlinedIcon sx={{ fontSize: 40 }} />
+                      No
                     </IconButton>
                   </Box>
                 </Box>
@@ -411,6 +413,7 @@ function CheckInChat({ input }) {
                       disabled={selectedWordIndex === null}
                     >
                       <CheckCircleOutlineIcon sx={{ fontSize: 40 }} />
+                  
                     </IconButton>
                     <IconButton 
                       onClick={handleRegenerate} 
@@ -422,6 +425,7 @@ function CheckInChat({ input }) {
                         )}
                     >
                       <CancelOutlinedIcon sx={{ fontSize: 40 }} />
+              
                     </IconButton>
                   </Box>
                 </>
