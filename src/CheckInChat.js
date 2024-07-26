@@ -323,8 +323,8 @@ function CheckInChat({ input }) {
                 sx={{ fontWeight: 'bold', mb: 2 }}
               >
                 {aiMessage}
-                <IconButton onClick={() => textToSpeech(aiMessage)} size="large">
-                    <VolumeUpIcon />
+                <IconButton onClick={() => textToSpeech(aiMessage)} >
+                    <VolumeUpIcon sx={{ fontSize: 40}}/>
                 </IconButton>
               </Typography>
             )}
@@ -379,8 +379,8 @@ function CheckInChat({ input }) {
                         onClick={() => handleWordSelection(index)}
                       >
                         <Typography variant="h6" sx={{ mb: 1 }}>{word}
-                         <IconButton onClick={(e) => { e.stopPropagation(); textToSpeech(word); }} size="large">
-                           <VolumeUpIcon />
+                         <IconButton onClick={(e) => { e.stopPropagation(); textToSpeech(word); }} >
+                           <VolumeUpIcon sx={{ fontSize: 40}}/>
                          </IconButton>
                         </Typography>
                         {relatedImages[index] ? (
