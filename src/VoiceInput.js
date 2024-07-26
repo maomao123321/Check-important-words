@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Box, TextField, IconButton } from '@mui/material';
 import MicIcon from '@mui/icons-material/Mic';
 import SendIcon from '@mui/icons-material/Send';
+import StopIcon from '@mui/icons-material/Stop';
 import axios from 'axios';
 
 function VoiceInput({ onSend }) {
@@ -104,12 +105,12 @@ function VoiceInput({ onSend }) {
           }
         }}
       />
-      <IconButton 
-        onClick={handleVoiceInput} 
-        color={isRecording ? "secondary" : "primary"}
+       <IconButton
+        onClick={handleVoiceInput}
+        color={isRecording ? "error" : "primary"}
         sx={{ mr: 1 }}
       >
-        <MicIcon sx={{ fontSize: 40 }} />
+        {isRecording ? <StopIcon sx={{ fontSize: 40 }} /> : <MicIcon sx={{ fontSize: 40 }} />}
       </IconButton>
       <IconButton 
         onClick={handleSend} 

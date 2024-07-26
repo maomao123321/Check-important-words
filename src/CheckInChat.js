@@ -298,7 +298,7 @@ function CheckInChat({ input }) {
             align="center"
             sx={{ color: 'text.secondary', fontStyle: 'italic' }}
           >
-            AI will help you find the right words here by generating related pictures
+            AI generates pictures here. <br></br><br></br>Pictures can help you find right words.
           </Typography>
         ) : finalNote ? (
           <Typography
@@ -307,11 +307,11 @@ function CheckInChat({ input }) {
             sx={{ fontWeight: 'bold', mb: 2 }}
           >
             {finalNote}
-            <IconButton onClick={() => textToSpeech(finalNote)} size="small">
-              <VolumeUpIcon />
+            <IconButton onClick={() => textToSpeech(finalNote)}>
+              <VolumeUpIcon sx={{ fontSize: 40}}/>
             </IconButton>
-            <IconButton onClick={() => handleCopy(finalNote)} size="small">
-              <ContentCopyIcon />
+            <IconButton onClick={() => handleCopy(finalNote)} >
+              <ContentCopyIcon sx={{ fontSize: 40}}/>
             </IconButton>
           </Typography>
         ) : (
@@ -323,7 +323,7 @@ function CheckInChat({ input }) {
                 sx={{ fontWeight: 'bold', mb: 2 }}
               >
                 {aiMessage}
-                <IconButton onClick={() => textToSpeech(aiMessage)} size="small">
+                <IconButton onClick={() => textToSpeech(aiMessage)} size="large">
                     <VolumeUpIcon />
                 </IconButton>
               </Typography>
@@ -379,7 +379,7 @@ function CheckInChat({ input }) {
                         onClick={() => handleWordSelection(index)}
                       >
                         <Typography variant="h6" sx={{ mb: 1 }}>{word}
-                         <IconButton onClick={(e) => { e.stopPropagation(); textToSpeech(word); }} size="small">
+                         <IconButton onClick={(e) => { e.stopPropagation(); textToSpeech(word); }} size="large">
                            <VolumeUpIcon />
                          </IconButton>
                         </Typography>

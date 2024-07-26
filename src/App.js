@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Typography, IconButton} from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import VoiceInput from './VoiceInput';
 import CheckInChat from './CheckInChat';
 
@@ -22,42 +22,52 @@ function App() {
     display: 'flex', 
     justifyContent: 'center', 
     alignItems: 'center', 
-    position: 'relative', 
     my: 4 
   }}>
     <Typography
       variant="h2"
       sx={{
         fontWeight: 'bold',
-        mr: 4  // 添加右边距，为图标腾出空间
       }}
     >
       Double Check Important Words
     </Typography>
-    <IconButton
-      onClick={handleReset}
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '12px',
-      }}
-    >
-        <HomeIcon sx={{fontSize: 48}} />
-          <Typography 
-          variant="subtitle1" 
-          sx={{
-            mt:1,
-            fontweight:"bold"
-          }}
-        
-          >Clear</Typography>
-        </IconButton>
       </Box>
 
-      {/* VoiceInput */}
-      <Box sx={{ mb: 2 }}>
+
+  {/* VoiceInput */}
+  <Box sx={{ mb: 2 }}>
         <VoiceInput onSend={handleSend} />
+      </Box>
+
+      {/* Refresh Icon */}
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          mb: 2,
+        }}
+      >
+        <IconButton
+          onClick={handleReset}
+          sx={{
+            padding: '12px',
+          }}
+        >
+          <RefreshIcon sx={{fontSize: 40}} />
+        </IconButton>
+        <Typography 
+          variant="subtitle1"
+          sx={{
+            ml: 2,
+            fontWeight: "bold",
+            maxWidth: '200px',
+            lineHeight: 1.2
+          }}
+        >
+          Input new, should clear first
+        </Typography>
       </Box>
 
       {/* Main Content */}
