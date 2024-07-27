@@ -12,7 +12,7 @@ const openai = axios.create({
   headers: { 'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}` }
 });
 
-function CheckInChat({ input }) {
+function CheckInChat({ input, inputCounter }) {
   const [aiMessage, setAiMessage] = useState('');
   const [keyword, setKeyword] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -29,10 +29,21 @@ function CheckInChat({ input }) {
 
   useEffect(() => {
     if (input) {
+            // 重置所有相关状态
+            setAiMessage('');
+            setKeyword('');
+            setImageUrl('');
+            setFinalNote('');
+            setCorrectedInput('');
+            setRelatedWords([]);
+            setRelatedImages([]);
+            setRegenerateCount(0);
+            setSelectedWordIndex(null);
+            // 开始新的处理流程
       setLoading(true);
       correctSpelling(input);
     }
-  }, [input]);
+  }, [input, inputCounter]);
 
 
   const correctSpelling = async (text) => {
