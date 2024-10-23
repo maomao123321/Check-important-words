@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react';
-import { Box, TextField, IconButton } from '@mui/material';
 import MicIcon from '@mui/icons-material/Mic';
 import SendIcon from '@mui/icons-material/Send';
 import StopIcon from '@mui/icons-material/Stop';
+import { Box, IconButton, TextField } from '@mui/material';
 import axios from 'axios';
+import React, { useRef, useState } from 'react';
 
 function VoiceInput({ onSend }) {
   const [input, setInput] = useState('');
@@ -114,7 +114,7 @@ function VoiceInput({ onSend }) {
       </IconButton>
       <IconButton 
         onClick={handleSend} 
-        color="primary"
+        sx={{ color: '#4CAF50' }}
       >
         <SendIcon sx={{ fontSize: 40 }} />
       </IconButton>
